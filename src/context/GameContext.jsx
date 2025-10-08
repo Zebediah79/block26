@@ -1,19 +1,20 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const GameContext = createContext();
+const randomNumber = () => {
+  return Math.floor(Math.random() * 9);
+};
 
 export const GameProvider = ({ children }) => {
   const [board, setBoard] = useState(makeBoard());
   const [score, setScore] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [molePosition, setMolePosition] = useState(
-    Math.floor(Math.random() * 9)
-  );
+  const [molePosition, setMolePosition] = useState(randomNumber());
 
   const startGame = () => {
     setScore(0);
-    setMolePosition(Math.floor(Math.random() * 9));
     setIsPlaying(true);
+    setMolePosition();
     setBoard(makeBoard());
   };
 
@@ -55,9 +56,9 @@ export function useGame() {
 
 function makeBoard(board = []) {
   const newBoard = Array(9).fill(false);
-  let mole = Math.floor(Math.random() * 9);
+  let mole = randomNumber();
   while (board[mole]) {
-    mole = Math.floor(Math.random() * 9);
+    mole = randomNumber();
   }
   newBoard[mole] = true;
   return newBoard;
