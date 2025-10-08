@@ -5,7 +5,7 @@ const randomNumber = () => {
   return Math.floor(Math.random() * 9);
 };
 
-export const GameProvider = ({ children }) => {
+export function GameProvider({ children }) {
   const [board, setBoard] = useState(makeBoard());
   const [score, setScore] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,7 +44,7 @@ export const GameProvider = ({ children }) => {
       {children}
     </GameContext.Provider>
   );
-};
+}
 
 export function useGame() {
   const context = useContext(GameContext);
